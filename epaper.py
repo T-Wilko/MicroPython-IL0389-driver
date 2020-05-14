@@ -158,7 +158,6 @@ class EPD:
         self._command(bytearray([VCOM_DATA_INT_SETTING]), b'\x87')
         
         
-        
     def wait_until_idle(self):
         while self.busy == 0:
             pass
@@ -172,13 +171,6 @@ class EPD:
         sleep_ms(10)
 
         self.rst(1)
-
-    # draw the current frame memory and switch to the next memory area
-    def display_frame(self):
-        self._command(bytearray([DISPLAY_UPDATE_CONTROL_2]), b'\xC7')
-        self._command(bytearray([MASTER_ACTIVATION]))
-        self._command(bytearray([TERMINATE_FRAME_READ_WRITE]))
-        self.wait_until_idle()
 
     # to wake call reset() or init()
     def sleep(self):
