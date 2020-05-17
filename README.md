@@ -4,6 +4,38 @@ IL0389 EPD IC Driver - Parameters are currently set for a 400x300 BW screen
 2 versions are currently available, although only the framebuf version is kept up to date and is easier to use with other drivers. Font renderers such as [Writer.py](https://github.com/peterhinch/micropython-font-to-py/blob/master/writer/WRITER.md) are often designed to interact with framebuf-derived display drivers only. For example, the official [MicroPython SSD1306 driver](https://github.com/micropython/micropython/blob/master/drivers/display/ssd1306.py) is also a framebuf derived driver.
 
 
+## Usage with epaper_framebuf.py (i.e. code to be used in main.py)
+#### Displays a test frame of text, rectangles, and lines
+
+```
+import epaper_framebuf as EFB
+
+width = 400
+height = 300
+
+# Create a framebuf object that doubles as an epaper interaction object
+efb = EFB.EPD(width, height)
+
+black = 1
+white = 0
+
+# Set what you want your background (primary) and secondary colours to be
+primary, secondary = white, black
+
+# Draw the test frame
+efb.fill(primary)
+efb.text('Hello World - 123456789', 15, height//3, secondary)
+efb.fill_rect(width//20, 2*(height//3), 30, 30, secondary)
+efb.rect(width//20, 2*(height//3)+40, 30, 30, secondary)
+efb.vline(width//20 + 50, 2*(height//3), 70, secondary)
+for i in range(8):
+    efb.hline(width//20 + 60, 2*(height//3)+(10*i), 50, secondary)
+
+# Display the image
+efb.show()
+
+```
+
 ## Usage with epaper.py (i.e. code to be used in main.py)
 #### Displays a test frame of text, rectangles, and lines
 
@@ -40,38 +72,6 @@ for i in range(8):
 
 # Display the image
 e.displayBuffer(buf)
-
-```
-
-## Usage with epaper_framebuf.py (i.e. code to be used in main.py)
-#### Displays a test frame of text, rectangles, and lines
-
-```
-import epaper_framebuf as EFB
-
-width = 400
-height = 300
-
-# Create a framebuf object that doubles as an epaper interaction object
-efb = EFB.EPD(width, height)
-
-black = 1
-white = 0
-
-# Set what you want your background (primary) and secondary colours to be
-primary, secondary = white, black
-
-# Draw the test frame
-efb.fill(primary)
-efb.text('Hello World - 123456789', 15, height//3, secondary)
-efb.fill_rect(width//20, 2*(height//3), 30, 30, secondary)
-efb.rect(width//20, 2*(height//3)+40, 30, 30, secondary)
-efb.vline(width//20 + 50, 2*(height//3), 70, secondary)
-for i in range(8):
-    efb.hline(width//20 + 60, 2*(height//3)+(10*i), 50, secondary)
-
-# Display the image
-efb.show()
 
 ```
 
