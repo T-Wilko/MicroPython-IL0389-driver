@@ -1,6 +1,9 @@
 # MicroPython-IL0389-driver
 IL0389 EPD IC Driver - Parameters are currently set for a 400x300 BW screen
 
+2 versions are currently available, although only the framebuf version is kept up to date and is easier to use with other drivers. Font renderers such as [Writer.py](https://github.com/peterhinch/micropython-font-to-py/blob/master/writer/WRITER.md) are often designed to interact with framebuf-derived display drivers only. For example, the official [MicroPython SSD1306 driver](https://github.com/micropython/micropython/blob/master/drivers/display/ssd1306.py) is also a framebuf derived driver.
+
+
 ## Usage with epaper.py (i.e. code to be used in main.py)
 #### Displays a test frame of text, rectangles, and lines
 
