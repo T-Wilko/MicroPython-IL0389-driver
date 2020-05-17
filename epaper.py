@@ -97,10 +97,11 @@ class EPD:
         self.buf = bytearray(self.size)
 
     def clearBuffer(self):
-        self._command(b'\x24')
+        self._command(bytearray([START_TRANSMISSION_2]))
         for i in range(0, len(self.buf)):
             self.buf[i] = 255
             self._data(bytearray([self.buf[i]]))
+        self._command(bytearray([DATA_STOP]))
 
     def displayBuffer(self, buf):
         self._command(bytearray([START_TRANSMISSION_2]))
