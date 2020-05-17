@@ -121,7 +121,17 @@ class EPD(framebuf.FrameBuffer):
         self._command(DATA_STOP)
         self._command(DISP_REFRESH)
         self.wait_until_idle()    
-
+    
+    # To display your own buffer, instead of the framebuf buffer
+    def show_buffer(self, buf):
+        self.wait_until_idle()
+        self._command(START_TRANSMISSION_2)
+        for i in range(0, len(buf)):
+            self._data(bytearray([buf[i]]))
+        self._command(DATA_STOP)
+        self._command(DISP_REFRESH)
+        self.wait_until_idle()
+        
     def _command(self, command, data=None):
         self.cs(1) # according to LOLIN_EPD
         self.dc(0)
